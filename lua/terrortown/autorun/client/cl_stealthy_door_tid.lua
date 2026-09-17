@@ -1,4 +1,4 @@
-local mat_tid_stealthdoor = Material("vgui/ttt/tid/icon_quiet")
+local mat_tid_stealthdoor = Material("vgui/ttt/tid/tid_quiet")
 
 local BaseHUD = baseclass.Get("pure_skin_element")
 
