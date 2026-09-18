@@ -1,5 +1,3 @@
-local mat_tid_stealthdoor = Material("vgui/ttt/tid/tid_quiet")
-
 local BaseHUD = baseclass.Get("pure_skin_element")
 
 local ADDON_WORKSHOP_ID = "2151694266"
@@ -53,16 +51,17 @@ hook.Add("TTTRenderEntityInfo", "TTT2_HUDDrawTargetID_StealthyDoors", function(t
 	
 	-- only rotating doors are supported
 	local class = ent:GetClass()
-	if class ~= "prop_door_rotating" and class ~= "func_door_rotating" then return end
-	
-	-- final checks
-	if not ent:PlayerCanOpenDoor() or tData:GetEntityDistance() > 90 then return end
+	if class == "prop_door_rotating" or class == "func_door_rotating" then
+		-- final checks
+		if not ent:PlayerCanOpenDoor() or tData:GetEntityDistance() > 90 then return end
 
-	-- add an empty line if there's already data in the description area
-	if tData:GetAmountDescriptionLines() > 0 then
-		tData:AddDescriptionLine()
+		-- add an empty line if there's already data in the description area
+		if tData:GetAmountDescriptionLines() > 0 then
+			tData:AddDescriptionLine()
+		end
+		
+		-- finally show the stealth door line
+		local darkGrayColor = Color(100, 100, 100)
+		tData:AddDescriptionLine(LANG.TryTranslation("ttt2_milkwater_tid_stealthydoor"), darkGrayColor, nil)
 	end
-	
-	-- finally show the stealth door line
-	tData:AddDescriptionLine(LANG.TryTranslation("ttt2_milkwater_tid_stealthydoor"), COLOR_LGRAY, {mat_tid_stealthdoor})
 end)
