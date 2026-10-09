@@ -22,9 +22,16 @@ hook.Add("TTTRenderEntityInfo", "TTT2_HUDDrawTargetID_WeaponStatsExtra", functio
 	-- show ammo type
 	local ammo = ent.Primary.Ammo
 	local ammoName = LANG.TryTranslation(string.lower("ammo_" .. ammo))
+	
+	-- skip weapons with no ammo ie grenades
+	if ammoName == "ammo_none" then return end
+	
+	-- replace HUGE 249 ammo name since it doesnt spawn
 	if ammoName == "ammo_airboatgun" then
 		ammoName = "None"
 	end
+	
+	-- add description
 	tData:AddDescriptionLine(
 		LANG.GetParamTranslation("ttt2_milkwater_tid_compatibleAmmo", ammoName),
 		nil,
